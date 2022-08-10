@@ -52,9 +52,6 @@ insert into TEscuela values('E04','Ambiental','Ingenieria')
 insert into TEscuela values('E05','Arquitectura','Ingenieria')
 go
 
-Select * from TEscuela
-Select * from TAlumno
-
 insert into TAlumno values('A0001','Almanza','Jair','Cusco','2001-7-25 10:34:09 AM','E01')
 insert into TAlumno values('A0002','Arteaga','Kevin','Arequipa','1983-4-1 6:23:12 PM ','E02')
 insert into TAlumno values('A0003','Barrio','John','Cusco','2003-1-13 5:21:23 AM','E01')
@@ -62,7 +59,7 @@ insert into TAlumno values('A0004','Garcia','Alan','Lima','1999-2-12 7:12:23 AM'
 insert into TAlumno values('A0005','Valdivia','Juan','Tacna','1998-8-28 9:32:12 AM','E04')
 go
 
-delete from TAlumno where CodAlumno = 'A0001'
+
 
 
 
