@@ -1,6 +1,6 @@
 -- Procedimientos almacenados
 -- Jair Almanza
--- 8/8/2022
+-- 9/8/2022
 
 --PA para TEscuela
 use BDUniversidad 
@@ -60,15 +60,18 @@ create proc spEliminarEscuela
 as begin
 	--CodEscuela debe existir
 	if exists(select CodEscuela from TEscuela where CodEscuela = @CodEscuela)
-		begin
-			delete from TEscuela where CodEscuela=@CodEscuela
-			select CodError = 0, Mensaje = 'Se elimino la escuela de manera satisfactoria'
-		end
+		--El CodEscuela no debe tener referencias en otras tablas
+		if 1<(SELECT COUNT(*) FROM TAlumno WHERE CodEscuela = @CodEscuela)
+			begin
+				delete from TEscuela where CodEscuela=@CodEscuela
+				select CodError = 0, Mensaje = 'Se elimino la escuela de manera satisfactoria'
+			end
+		else select CodError = 1, Mensaje = 'Error: El CodEscuela se encuentra referenciado en TAlumno'
 	else select CodError = 1, Mensaje = 'Error: El CodEscuela no existe'
 end
 go
 
-exec spEliminarEscuela @CodEscuela = 'E06';
+exec spEliminarEscuela @CodEscuela = 'E01';
 go
 
 select * from TEscuela
