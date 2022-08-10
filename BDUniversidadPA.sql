@@ -61,7 +61,7 @@ as begin
 	--CodEscuela debe existir
 	if exists(select CodEscuela from TEscuela where CodEscuela = @CodEscuela)
 		--El CodEscuela no debe tener referencias en otras tablas
-		if 1<(SELECT COUNT(*) FROM TAlumno WHERE CodEscuela = @CodEscuela)
+		if not exists(select CodEscuela from TAlumno where CodEscuela = @CodEscuela)
 			begin
 				delete from TEscuela where CodEscuela=@CodEscuela
 				select CodError = 0, Mensaje = 'Se elimino la escuela de manera satisfactoria'
@@ -71,7 +71,7 @@ as begin
 end
 go
 
-exec spEliminarEscuela @CodEscuela = 'E01';
+exec spEliminarEscuela @CodEscuela = 'E06';
 go
 
 select * from TEscuela
